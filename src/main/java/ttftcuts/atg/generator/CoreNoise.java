@@ -51,8 +51,8 @@ public class CoreNoise {
 
         this.ledges = new OctaveNoise(rand, scale * 5.0, 2);
 
-        this.lumps = new JordanTurbulence(rand, scale * 3.0, 6, 2.0, 0.8, 0.65, 0.4, 0.45, 1.0, 0.6, 1.0, 2, 0.15, 0.25, 0.5);
-        this.ridges = new RidgeNoise(rand, scale * 6.0, 5);
+        this.lumps = new JordanTurbulence(rand, scale * 1.0, 6, 2.0, 0.8, 0.65, 0.4, 0.45, 1.0, 0.6, 1.0, 2, 0.15, 0.25, 0.5);
+        this.ridges = new RidgeNoise(rand, scale * 4.0, 5);
 
         this.oceans = new OctaveNoise(rand, scale * 10.0, 4);
         this.dunes = new DuneNoise(rand, scale * 0.3, 0.2);
@@ -61,8 +61,8 @@ public class CoreNoise {
 
         this.swamps = new OctaveNoise(rand, scale * 8.0, 4, 2.0, 0.75);
 
-        this.temperature = new TailoredNoise(rand, 1281,0.87, 119,0.07, 26,0.06);
-        this.moisture = new TailoredNoise(rand, 400,0.76, 243,0.16, 53,0.08);
+        this.temperature = new TailoredNoise(rand, 1281*2,0.87, 119,0.07, 26,0.06);
+        this.moisture = new TailoredNoise(rand, 400*2,0.76, 243,0.16, 53,0.08);
 
         this.blobs = new BiomeBlobs(rand.nextLong(), 64);
 
@@ -126,6 +126,7 @@ public class CoreNoise {
             vals.height = MathUtil.polymax(vals.height, abyss, 0.1);
         }
 
+        //This must be where swamps are added in based on being near the coast?
         vals.swamp = 0.0;
         if (vals.height >= COAST_MIN && vals.height < SWAMP_MAX) {
             double temp = this.temperature.getValue(vals.x, vals.z);
@@ -150,7 +151,8 @@ public class CoreNoise {
                 vals.swamp = factor; //Math.max(0.0, swamp);
             }
         }
-        
+
+        //Ledges? must be the cliff things
         double ledge1 = Math.min(0.975, ledges.getValue(-vals.x + 34273 ,vals.z + 86269) * 1.15);
         ledge1 = ledge1 * ledge1;
 

@@ -207,5 +207,6 @@ public class DefaultBiomeSettings extends BiomeSettings {
         b.addHeightModifier(Biomes.MUTATED_MESA, "mesa").setParameter("spires", true); // bryce
         b.addHeightModifier(Biomes.MUTATED_MESA_ROCK, "mesa").setParameter("variant", 1); // plateau F M
         b.addHeightModifier(Biomes.MUTATED_MESA_CLEAR_ROCK, "mesa").setParameter("variant", 1); // plateau M
+        b.addHeightModifier(Biomes.JUNGLE, "mesa");
     }
 }
